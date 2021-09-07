@@ -26,12 +26,6 @@ import { notify } from '../utils/notifications';
 import { useHistory, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
-import { TVChartContainer } from '../components/TradingView';
-// Use following stub for quick setup without the TradingView private dependency
-// function TVChartContainer() {
-//   return <></>
-// }
-
 const { Option, OptGroup } = Select;
 
 const Wrapper = styled.div`
@@ -84,7 +78,7 @@ function TradePageInner() {
   });
 
   useEffect(() => {
-    document.title = marketName ? `${marketName} — Serum` : 'Serum';
+    document.title = marketName ? `${marketName} — Cyclos` : 'Cyclos';
   }, [marketName]);
 
   const changeOrderRef = useRef<
@@ -341,13 +335,8 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
         flexWrap: 'nowrap',
       }}
     >
-      <Col flex="auto" style={{ height: '50vh' }}>
-        <Row style={{ height: '100%' }}>
-          <TVChartContainer />
-        </Row>
-        <Row style={{ height: '70%' }}>
-          <UserInfoTable />
-        </Row>
+      <Col flex="auto" style={{ height: '100%', display: 'flex' }}>
+        <UserInfoTable />
       </Col>
       <Col flex={'360px'} style={{ height: '100%' }}>
         <Orderbook smallScreen={false} onPrice={onPrice} onSize={onSize} />
@@ -367,9 +356,6 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
-      <Row style={{ height: '30vh' }}>
-        <TVChartContainer />
-      </Row>
       <Row
         style={{
           height: '900px',
@@ -406,9 +392,6 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
-      <Row style={{ height: '50vh' }}>
-        <TVChartContainer />
-      </Row>
       <Row>
         <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
           <TradeForm style={{ flex: 1 }} setChangeOrderRef={onChangeOrderRef} />
