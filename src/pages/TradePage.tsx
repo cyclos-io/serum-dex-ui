@@ -26,11 +26,11 @@ import { notify } from '../utils/notifications';
 import { useHistory, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
-import { TVChartContainer } from '../components/TradingView';
+// import { TVChartContainer } from '../components/TradingView';
 // Use following stub for quick setup without the TradingView private dependency
-// function TVChartContainer() {
-//   return <></>
-// }
+function TVChartContainer() {
+  return <></>
+}
 
 const { Option, OptGroup } = Select;
 
@@ -337,7 +337,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <Row
       style={{
-        minHeight: '900px',
+        minHeight: '100px',
         flexWrap: 'nowrap',
       }}
     >
@@ -367,7 +367,7 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
-      <Row style={{ height: '30vh' }}>
+      <Row style={{ height: '5vh' }}>
         <TVChartContainer />
       </Row>
       <Row
@@ -406,7 +406,7 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
 const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
   return (
     <>
-      <Row style={{ height: '50vh' }}>
+      <Row style={{ height: '5vh' }}>
         <TVChartContainer />
       </Row>
       <Row>
