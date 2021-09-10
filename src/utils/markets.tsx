@@ -24,6 +24,12 @@ import {WRAPPED_SOL_MINT} from '@project-serum/serum/lib/token-instructions';
 import {Order} from '@project-serum/serum/lib/market';
 import BonfidaApi from './bonfidaConnector';
 
+// Hacky approach until PR is approved to add mint in @project-serum/serum
+TOKEN_MINTS.push({
+  address: new PublicKey('BRLsMczKuaR5w9vSubF4j8HwEGGprVAyyVgS4EX7DKEg'),
+  name: 'CYS',
+})
+
 // Used in debugging, should be false in production
 const _IGNORE_DEPRECATED = false;
 
@@ -159,7 +165,7 @@ const _SLOW_REFRESH_INTERVAL = 5 * 1000;
 const _FAST_REFRESH_INTERVAL = 1000;
 
 export const DEFAULT_MARKET = USE_MARKETS.find(
-  ({ name, deprecated }) => name === 'SRM/USDT' && !deprecated,
+  ({ name, deprecated }) => name === 'CYS/USDC' && !deprecated,
 );
 
 export function getMarketDetails(
