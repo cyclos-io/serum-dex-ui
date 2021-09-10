@@ -84,7 +84,7 @@ function TradePageInner() {
   });
 
   useEffect(() => {
-    document.title = marketName ? `${marketName} — Serum` : 'Serum';
+    document.title = marketName ? `${marketName} — Cyclos` : 'Cyclos';
   }, [marketName]);
 
   const changeOrderRef = useRef<
