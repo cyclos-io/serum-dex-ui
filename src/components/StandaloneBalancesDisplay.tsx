@@ -45,7 +45,7 @@ export default function StandaloneBalancesDisplay() {
   const balances = useBalances();
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
   const connection = useSendConnection();
-  const { providerUrl, providerName, wallet, connected } = useWallet();
+  const { wallet, connected, providerName, providerUrl } = useWallet();
   const [baseOrQuote, setBaseOrQuote] = useState('');
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
@@ -170,19 +170,19 @@ export default function StandaloneBalancesDisplay() {
     string,
     string | undefined,
   ][] = [
-    [
-      baseCurrency,
-      baseCurrencyBalances,
-      'base',
-      market?.baseMintAddress.toBase58(),
-    ],
-    [
-      quoteCurrency,
-      quoteCurrencyBalances,
-      'quote',
-      market?.quoteMintAddress.toBase58(),
-    ],
-  ];
+      [
+        baseCurrency,
+        baseCurrencyBalances,
+        'base',
+        market?.baseMintAddress.toBase58(),
+      ],
+      [
+        quoteCurrency,
+        quoteCurrencyBalances,
+        'quote',
+        market?.quoteMintAddress.toBase58(),
+      ],
+    ];
 
   return (
     <FloatingElement style={{ flex: 1, paddingTop: 10 }}>
