@@ -11,7 +11,8 @@ import {
   useTokenAccounts,
 } from '../utils/markets';
 import DepositDialog from './DepositDialog';
-import { useWallet } from '../utils/wallet';
+// import { useWallet } from '../utils/wallet';
+import { useWallet } from '@solana/wallet-adapter-react';
 import Link from './Link';
 import { settleFunds } from '../utils/send';
 import { useSendConnection } from '../utils/connection';
@@ -45,7 +46,8 @@ export default function StandaloneBalancesDisplay() {
   const balances = useBalances();
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
   const connection = useSendConnection();
-  const { providerUrl, providerName, wallet, connected } = useWallet();
+  const { wallet, connected } = useWallet();
+  let walletAdapter = wallet?.adapter() as any;
   const [baseOrQuote, setBaseOrQuote] = useState('');
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
@@ -105,7 +107,7 @@ export default function StandaloneBalancesDisplay() {
         market,
         openOrders: openOrdersAccount,
         connection,
-        wallet,
+        wallet: walletAdapter,
         baseCurrencyAccount,
         quoteCurrencyAccount,
         usdcRef,
@@ -149,7 +151,7 @@ export default function StandaloneBalancesDisplay() {
           market,
           openOrders: openOrdersAccount,
           connection,
-          wallet,
+          wallet: walletAdapter,
           baseCurrencyAccount,
           quoteCurrencyAccount,
           usdcRef,
@@ -161,7 +163,7 @@ export default function StandaloneBalancesDisplay() {
       }
       console.log('Finished settling funds.');
     };
-    connected && wallet?.autoApprove && autoSettleEnabled && autoSettle();
+    connected && walletAdapter?.autoApprove && autoSettleEnabled && autoSettle();
   }, 1000);
 
   const formattedBalances: [
@@ -170,19 +172,19 @@ export default function StandaloneBalancesDisplay() {
     string,
     string | undefined,
   ][] = [
-    [
-      baseCurrency,
-      baseCurrencyBalances,
-      'base',
-      market?.baseMintAddress.toBase58(),
-    ],
-    [
-      quoteCurrency,
-      quoteCurrencyBalances,
-      'quote',
-      market?.quoteMintAddress.toBase58(),
-    ],
-  ];
+      [
+        baseCurrency,
+        baseCurrencyBalances,
+        'base',
+        market?.baseMintAddress.toBase58(),
+      ],
+      [
+        quoteCurrency,
+        quoteCurrencyBalances,
+        'quote',
+        market?.quoteMintAddress.toBase58(),
+      ],
+    ];
 
   return (
     <FloatingElement style={{ flex: 1, paddingTop: 10 }}>
@@ -245,13 +247,13 @@ export default function StandaloneBalancesDisplay() {
                 </ActionButton>
               </Col>
             </RowBox>
-            <Tip>
+            {wallet && <Tip>
               All deposits go to your{' '}
-              <Link external to={providerUrl}>
-                {providerName}
+              <Link external to={wallet.url}>
+                {wallet.name}
               </Link>{' '}
               wallet
-            </Tip>
+            </Tip>}
           </React.Fragment>
         ),
       )}
