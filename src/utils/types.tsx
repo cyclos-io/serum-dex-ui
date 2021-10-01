@@ -16,10 +16,6 @@ export interface ConnectionContextValues {
 export interface WalletContextValues {
   wallet: WalletAdapter | undefined;
   connected: boolean;
-  providerUrl: string;
-  setProviderUrl: (newProviderUrl: string) => void;
-  providerName: string;
-  select: () => void;
 }
 
 export interface MarketInfo {
