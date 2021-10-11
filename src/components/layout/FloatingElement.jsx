@@ -15,6 +15,7 @@ export default function FloatingElement({
   return (
     <Wrapper
       style={{
+        zIndex: 0,
         height: stretchVertical ? 'calc(100% - 10px)' : undefined,
         ...style,
       }}

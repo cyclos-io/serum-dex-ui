@@ -10,8 +10,7 @@ import Link from './Link';
 
 export default function DepositDialog({ onClose, baseOrQuote }) {
   const { market, baseCurrency, quoteCurrency } = useMarket();
-
-  const { providerName, providerUrl } = useWallet();
+  const { walletProviderInfo } = useWallet();
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
   let coinMint;
@@ -49,8 +48,8 @@ export default function DepositDialog({ onClose, baseOrQuote }) {
             ) : (
               <>
                 Visit{' '}
-                <Link external to={providerUrl}>
-                  {providerName}
+                <Link external to={walletProviderInfo?.url}>
+                  {walletProviderInfo?.name}
                 </Link>{' '}
                 to create an account for this mint
               </>

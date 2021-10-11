@@ -1,24 +1,17 @@
 import React from 'react';
-import { Dropdown, Menu } from 'antd';
+import { Button, Menu } from 'antd';
 import { useWallet } from '../utils/wallet';
-import LinkAddress from './LinkAddress';
+
+import { useWalletKit } from '@gokiprotocol/walletkit';
 
 export default function WalletConnect() {
-  const { connected, wallet, select, connect, disconnect } = useWallet();
-  const publicKey = (connected && wallet?.publicKey?.toBase58()) || '';
 
-  const menu = (
-    <Menu>
-      {connected && <LinkAddress shorten={true} address={publicKey} />}
-      <Menu.Item key="3" onClick={select}>
-        Change Wallet
-      </Menu.Item>
-    </Menu>
-  );
+  const { disconnect, connected } = useWallet();
+  const { connect } = useWalletKit();
 
-  return (
-    <Dropdown.Button onClick={connected ? disconnect : connect} overlay={menu}>
-      {connected ? 'Disconnect' : 'Connect'}
-    </Dropdown.Button>
+  return connected ? (
+    <Button onClick={disconnect}> Disconnect </Button>
+  ) : (
+    <Button onClick={connect}> Connect </Button>
   );
 }

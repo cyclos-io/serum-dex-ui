@@ -45,7 +45,7 @@ export default function StandaloneBalancesDisplay() {
   const balances = useBalances();
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
   const connection = useSendConnection();
-  const { providerUrl, providerName, wallet, connected } = useWallet();
+  const { walletProviderInfo, wallet, connected } = useWallet();
   const [baseOrQuote, setBaseOrQuote] = useState('');
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
@@ -247,8 +247,8 @@ export default function StandaloneBalancesDisplay() {
             </RowBox>
             <Tip>
               All deposits go to your{' '}
-              <Link external to={providerUrl}>
-                {providerName}
+              <Link external to={walletProviderInfo?.url}>
+                {walletProviderInfo?.name}
               </Link>{' '}
               wallet
             </Tip>

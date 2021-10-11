@@ -249,7 +249,7 @@ export default function TopBar() {
             </Popover>
           </div>
         )}
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <WalletConnect />
         </div>
       </Wrapper>
