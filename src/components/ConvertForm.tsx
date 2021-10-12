@@ -24,7 +24,7 @@ import FloatingElement from './layout/FloatingElement';
 import WalletConnect from './WalletConnect';
 import { SwapOutlined } from '@ant-design/icons';
 import { CustomMarketInfo } from '../utils/types';
-import { WalletAdapter } from '../wallet-adapters';
+import { ConnectedWallet } from '@saberhq/use-solana';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -174,7 +174,7 @@ function ConvertFormSubmit({
   setSize: (newSize: number | undefined) => void;
   fromToken: string;
   toToken: string;
-  wallet?: WalletAdapter;
+  wallet?: ConnectedWallet | null;
   customMarkets: CustomMarketInfo[];
 }) {
   const { market } = useMarket();
